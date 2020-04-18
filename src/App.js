@@ -12,16 +12,11 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false
   };
-
-  switchNameHandler = () => {
-    this.setState({
-      persons: [
-        { name: 'Xoni!', age: 24 },
-        { name: 'Egzon', age: 27 },
-        { name: 'Test', age: 27 }
-      ]
-    });
-  };
+  deletePersonHeandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons })
+  }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow })
@@ -37,8 +32,11 @@ class App extends Component {
     if (this.state.showPersons === true) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person name={person.name} age={person.age} />
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() => this.deletePersonHeandler(index)}
+              name={person.name}
+              age={person.age} />
           })}
         </div>
       )
