@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -21,9 +22,6 @@ class App extends Component {
     const person = {
       ...this.state.persons[personIndex]
     };
-
-    // const person = Object.assign({}, this.state.persons[personIndex]);
-
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
@@ -49,9 +47,13 @@ class App extends Component {
       backgroundColor: 'green',
       font: 'inherit',
       color: 'white',
-      border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'orange',
+        color: 'blue',
+        transition: '.3s'
+      }
     };
 
     let persons = null;
@@ -70,6 +72,11 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[":hover"] = {
+        backgroundColor: 'orange',
+        color: 'blue',
+        transition: '.3s'
+      }
     }
     let classes = []
     if (this.state.persons.length <= 2) {
@@ -88,8 +95,7 @@ class App extends Component {
         {persons}
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default App;
+export default Radium(App);
