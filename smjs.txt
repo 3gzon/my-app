@@ -1,0 +1,69 @@
+let students = [
+
+];
+
+let userForm = document.getElementById('createForm');
+let firstName = document.getElementById('first_name');
+let last_name = document.getElementById('last_name');
+let emailId = document.getElementById('emailId');
+let schoolId = document.getElementById('first_name');
+let cityId = document.getElementById('first_name');
+let tableContainer = document.getElementById('student-container');
+function renderStudent() {
+    //reset stundet form
+    tableContainer.innerHTML = '';
+
+    //create table
+    let table = document.createElement('table');
+    let tableHead = document.createElement('thead');
+    let tableBody = document.createElement('tbody');
+
+    let headerRow = document.createElement('tr');
+    headerRow.innerHTML = `
+     <th>First name</th>
+     <th>Last name</th>
+     <th>Email</th>
+     <th>School</th>
+     <th>City</th>
+     <th>Actions</th>
+    `
+    tableHead.appendChild(headerRow);
+    table.appendChild(tableHead)
+
+    students.forEach(student => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${student.$first_name}</td>
+        <td>${student.$last_name}</td>
+
+        `;
+        tableBody.appendChild(row);
+    })
+    table.appendChild(tableBody);
+    tableContainer.appendChild(table);
+}
+
+function addStudent(event) {
+    event.preventDefault();
+    const $first_name = firstName.value;
+    const $last_name = last_name.value;
+
+    const newStudent = {
+        id: students.length + 1,
+        $first_name,
+        $last_name
+    }
+
+    students.push(newStudent);
+    renderStudent();
+    firstName.value = '';
+    last_name.value = ''
+}
+
+
+
+
+
+
+userForm.addEventListener('submit', addStudent);
+renderStudent();
